@@ -1,4 +1,10 @@
-lib/*.*
-out/*.*
-.idea/*.*
-*.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
+JavaPrayoga.iml
+lib/
+out/
+/.idea/libraries/com_google_guava_guava_21_0.xml
+/.idea/libraries/
+/.idea/
