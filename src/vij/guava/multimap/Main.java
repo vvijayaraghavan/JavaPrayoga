@@ -24,7 +24,7 @@ public class Main {
         System.out.println(lowerList.toString());
     }
 
-    private Multimap<String,String> getMultimap(){
+    private Multimap<String,String> getMultimap() {
 
         //Map<String, List<String>>
         // lower -> a, b, c, d, e

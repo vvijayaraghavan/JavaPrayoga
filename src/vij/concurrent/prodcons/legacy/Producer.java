@@ -29,7 +29,7 @@ public class Producer implements Runnable {
     private void produce(int i) throws InterruptedException {
 
         synchronized (sharedQueue) {
-            //if sharedQuey is full wait until consumer consumes.
+            //if sharedQueue is full wait until consumer consumes.
             while (sharedQueue.size() == maxSize) {
                 System.out.println("Queue is full, producerThread is waiting for "
                         + "consumerThread to consume, sharedQueue's size= "+maxSize);

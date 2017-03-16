@@ -1,0 +1,29 @@
+#########################################################################################
+
+PRACTICE: INVOKE WAIT METHOD NOT INSIDE IF, ONLY FROM WHILE
+
+----CODE SNIPPET - STARTS
+
+line 01: if (condition) {
+line 02:	wait();
+line 03: }
+line 04: postWait();
+	
+----CODE SNIPPET - ENDS
+
+REASON:
+>> Suppose, your thread has met the condition on line 01 and is waiting on line 02.
+>> Ideally, another thread from your same application has to notify the above thread's wait which will do based on the connection of the condition of the waiting thread.
+>> Just in case, a spurious notify/notifyAll has been made and if the above waiting thread is notified without meeting the condition, the code at line 04 will be executed, as the condition is checked using if and it will be done once.
+>> If the same condition is checked in a while loop, even upon that spurious notification, the while loop will execute and check the condition again, and if not met, your thread will goto wait state, which is what required.
+
+----CODE SNIPPET - IDEAL WAY - STARTS
+
+line 01: while (condition) {
+line 02:	wait();
+line 03: }
+line 04: postWait();
+	
+----CODE SNIPPET - IDEAL WAY - ENDS
+
+#########################################################################################

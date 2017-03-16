@@ -31,7 +31,7 @@ public class Consumer implements Runnable {
 
         int consumedValue = -1;
         synchronized (sharedQueue) {
-            //if sharedQuey is empty wait until producer produces.
+            //if sharedQueue is empty wait until producer produces.
             while (sharedQueue.size() == 0) {
                 System.out.println("Queue is empty, consumerThread is waiting for "
                         + "producerThread to produce, sharedQueue's size= 0 ");
