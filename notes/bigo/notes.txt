@@ -1,0 +1,7 @@
+HOW (n Log n) IS DERIVED
+
+-- n is the number of elements in your array
+
+>> When the number of comparisons in your algorithms are n!
+>> And when the same can be reduced to a logarithmic factor of n, which is log n + log (n-1) + log (n-2) ... + log (1)
+>> This gives us the (n Log n) notation
