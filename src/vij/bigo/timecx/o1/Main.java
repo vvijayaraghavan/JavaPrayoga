@@ -1,6 +1,6 @@
 package vij.bigo.timecx.o1;
 
-import vij.bigo.timecx.MyArray;
+import vij.bigo.timecx.BigOTimeCxUtil;
 
 /**
  * Created by Vijay on 2017, March 19.
@@ -10,7 +10,8 @@ import vij.bigo.timecx.MyArray;
  */
 public class Main {
 
-    private MyArray myIntArray;
+    private int[] myIntArray;
+    private int myIntArraySize;
 
     //Time Taken Records
     private static long startTime;
@@ -18,8 +19,8 @@ public class Main {
 
     Main() {
 
-        myIntArray = new MyArray();
-        myIntArray.createArrayOfRandomNumbers(1000);
+        myIntArray = BigOTimeCxUtil.createRandomIntArray(1000);
+        myIntArraySize = myIntArray.length;
     }
 
     public static void main(String[] args) {
@@ -37,11 +38,21 @@ public class Main {
     private void fetchIndices(int arrayIndex) {
 
         startTime = System.currentTimeMillis();
-        int fetchedVal = myIntArray.getArrayValueFromIndex(arrayIndex);
+        int fetchedVal = getArrayValueFromIndex(arrayIndex);
         endTime = System.currentTimeMillis();
 
         System.out.println("Time taken to fetch '" + fetchedVal + "' from " +
                 "index[" + arrayIndex + "] is '" + (endTime - startTime) + "' Milliseconds");
+    }
+
+    public int getArrayValueFromIndex(int indexValue) {
+
+        if (indexValue < 0 || indexValue > myIntArraySize) {
+
+            throw new ArrayIndexOutOfBoundsException("Given index is not within the bounds of the array");
+        }
+
+        return myIntArray[indexValue];
     }
 
 }

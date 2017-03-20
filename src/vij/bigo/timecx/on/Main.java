@@ -1,6 +1,9 @@
 package vij.bigo.timecx.on;
 
-import vij.bigo.timecx.MyArray;
+import vij.bigo.timecx.BigOTimeCxUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Vijay on 2017, March 19.
@@ -16,52 +19,52 @@ import vij.bigo.timecx.MyArray;
  */
 public class Main {
 
-    private MyArray myIntArray[];
-
     //Time Taken Records
     private static long startTime;
     private static long endTime;
 
-    Main(int myIntArrayObjects) {
+    Main() {
 
-        myIntArray = new MyArray[myIntArrayObjects];
+    }
+
+    private void createIntArrays(List<int[]> myIntArrayLst) {
+
+        int[] arraySizes = {100000, 200000, 300000, 40000000, 5000000};
+        for (int arraySize : arraySizes) {
+
+            myIntArrayLst.add(BigOTimeCxUtil.createRandomIntArray(arraySize));
+        }
     }
 
     public static void main(String[] args) {
 
+        Main bigOn = new Main();
         //Create array of different sizes
-        int[] arrayOfDifftSizes = {100000, 200000, 300000, 400000, 500000};
+        List<int[]> myIntArrayLst = new ArrayList<>();
+        bigOn.createIntArrays(myIntArrayLst);
 
-        Main bigOn = new Main(arrayOfDifftSizes.length);
-
-        int idx = 0;
-        for (int arraySize : arrayOfDifftSizes) {
-
-            bigOn.myIntArray[idx] = new MyArray();
-            bigOn.myIntArray[idx].createArrayOfRandomNumbers(arraySize);
-            idx++;
-        }
-
-        //Find for an element in the array
+        //Find some random values in each of the array created and record the timings
         int[] searchValues = {0, 2, 467, 44, 500};
-        for (int a = 0; a <arrayOfDifftSizes.length ; a++) {
+        for (int searchValue : searchValues) {
 
-            int[] arrayToSearch = bigOn.myIntArray[a].getArray();
-            int searchArraySize = arrayToSearch.length;
-            LinearSearch lnSrch = new LinearSearch(arrayToSearch);
+            for (int[] searchArray : myIntArrayLst) {
 
-            startTime = System.currentTimeMillis();
-            int arrayIndex = lnSrch.searchValueFromArray(searchValues[a]);
-            endTime = System.currentTimeMillis();
+                LinearSearch lnSrch = new LinearSearch(searchArray);
+                int searchArraySize = searchArray.length;
 
-            if (arrayIndex == searchArraySize) {
+                startTime = System.currentTimeMillis();
+                int arrayIndex = lnSrch.searchValueFromArray(searchValue);
+                endTime = System.currentTimeMillis();
 
-                System.err.println("Given value '" + searchValues[a] + "' NOT FOUND! Array Size[" + searchArraySize + "] Time Taken '" + (endTime - startTime) + "' Milliseconds");
-            } else {
+                if (arrayIndex == searchArraySize) {
 
-                System.out.println("Given value '" + searchValues[a] + "' FOUND at Index[" + arrayIndex + "] Array Size[" + searchArraySize + "] Time Taken '" + (endTime - startTime) + "' Milliseconds");
+                    System.err.println("ArraySize[" + searchArraySize + "] TimeTaken[" + (endTime - startTime) + " ms] SearchValue[" + searchValue + "] NOT FOUND!");
+                } else {
+
+                    System.out.println("ArraySize[" + searchArraySize + "] TimeTaken[" + (endTime - startTime) + " ms] SearchValue[" + searchValue + "] FOUND AT INDEX[" + arrayIndex + "]");
+                }
             }
-        }
+        } //Search Random Values - Loop
     }
 
 
