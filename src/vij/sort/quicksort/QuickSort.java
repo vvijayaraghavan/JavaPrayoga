@@ -9,13 +9,13 @@ import java.util.Arrays;
  */
 public class QuickSort {
 
-    private int[] arrayForPartition;
-    private MutableInt itertationCount = new MutableInt(0);
+    private int[] arrayForSort;
+    private MutableInt iterationCount = new MutableInt(0);
     private MutableInt recursiveCallCount = new MutableInt(0);
 
-    public QuickSort(int[] arrayForPartition) {
+    public QuickSort(int[] arrayForSort) {
 
-        this.arrayForPartition = arrayForPartition;
+        this.arrayForSort = arrayForSort;
     }
 
     public static void main(String[] args) {
@@ -23,20 +23,20 @@ public class QuickSort {
         int[] i = {5, 4, 9, 6, 3, 5, 1, 0};
 
         QuickSort quickSort = new QuickSort(i);
-        quickSort.sort(0, quickSort.arrayForPartition.length - 1);
+        quickSort.sort(0, quickSort.arrayForSort.length - 1);
 
-        System.out.println("SORTED ARRAY: \n" + Arrays.toString(quickSort.arrayForPartition));
+        System.out.println("SORTED ARRAY: \n" + Arrays.toString(quickSort.arrayForSort));
         System.out.println("STATS:");
-        System.out.println("ARRAY SIZE: " + quickSort.arrayForPartition.length);
-        System.out.println("TOTAL ITERATIONS: " + quickSort.itertationCount.getValue());
+        System.out.println("ARRAY SIZE: " + quickSort.arrayForSort.length);
+        System.out.println("TOTAL ITERATIONS: " + quickSort.iterationCount.getValue());
         System.out.println("TOTAL RECURSIVE CALLS: " + quickSort.recursiveCallCount.getValue());
     }
 
     private void testPartition() {
 
-        int newPivotLocation = partition(0, arrayForPartition.length-1);
+        int newPivotLocation = partition(0, arrayForSort.length-1);
 
-        System.out.println("Partitioned Array:\n" + Arrays.toString(arrayForPartition));
+        System.out.println("Partitioned Array:\n" + Arrays.toString(arrayForSort));
         System.out.println("New Pivot Location: " + newPivotLocation);
     }
 
@@ -62,20 +62,18 @@ public class QuickSort {
     // Pivot location is chosen as the endIdx location
     private int partition(int startIdx, int endIdx) {
 
-        System.out.println("Partitioning with startIdx[" + startIdx + "] endIdx[" + endIdx + "]" + ((int)((endIdx + startIdx) - 1)/2));
+//        System.out.println("Partitioning with startIdx[" + startIdx + "] endIdx[" + endIdx + "]" + ((int)((endIdx + startIdx) - 1)/2));
         int i = startIdx - 1;
-//        int pivotIdx = endIdx; //24i/10r
-        int pivotIdx = ((endIdx + startIdx) - 1)/2; //19i/10r
-//        int pivotIdx = startIdx; //24i/12r
+        int pivotIdx = endIdx;
 
         for (int j=startIdx ; j<=endIdx ; j++) {
 
-            if (arrayForPartition[j] <= arrayForPartition[pivotIdx]) {
+            if (arrayForSort[j] <= arrayForSort[pivotIdx]) {
 
                 i++;
                 swap(i, j);
             }
-            itertationCount.getAndIncrement();
+            iterationCount.getAndIncrement();
         }
 
         return i; //new pivot location
@@ -86,9 +84,9 @@ public class QuickSort {
         if (leftIdx == rightIdx) {
             return;
         }
-        int temp = arrayForPartition[leftIdx];
-        arrayForPartition[leftIdx] = arrayForPartition[rightIdx];
-        arrayForPartition[rightIdx] = temp;
+        int temp = arrayForSort[leftIdx];
+        arrayForSort[leftIdx] = arrayForSort[rightIdx];
+        arrayForSort[rightIdx] = temp;
     }
 
 }
