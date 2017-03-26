@@ -15,33 +15,42 @@ import java.util.Stack;
  */
 public class Traverse {
 
-    public static final int TRAVERSAL_TYPE_PRE = 1;
-    public static final int TRAVERSAL_TYPE_IN = 2;
-    public static final int TRAVERSAL_TYPE_POST = 3;
+    public enum TRAVERSAL_POLICY{PRE_ORDER_TRAVERSAL, IN_ORDER_TRAVERSAL, POST_ORDER_TRAVERSAL}
 
-    public static final int ASCENDING_ORDER = TRAVERSAL_TYPE_IN;
-    public static final int DESCENDING_ORDER = 4;
+    public enum TREE_SORT_ORDER{ASCENDING_ORDER, DESCENDING_ORDER}
 
-    public static void traverseTree(Node rootNode, final int TRAVERSAL_TYPE) {
+    public enum SUB_TREE{LEFT_SUB_TREE, RIGHT_SUB_TREE}
 
-        if (TRAVERSAL_TYPE == TRAVERSAL_TYPE_PRE) {
+    public static void traverse(Node rootNode, final TRAVERSAL_POLICY traversal_policy) {
 
-            performPreOrderTraversal(rootNode);
-        } else if (TRAVERSAL_TYPE == TRAVERSAL_TYPE_IN) {
+        switch(traversal_policy) {
 
-            performInOrderTraversal(rootNode);
-        } else if (TRAVERSAL_TYPE == TRAVERSAL_TYPE_POST) {
+            case PRE_ORDER_TRAVERSAL:
+                performPreOrderTraversal(rootNode);
+                break;
+            case IN_ORDER_TRAVERSAL:
+                performInOrderTraversal(rootNode);
+                break;
+            case POST_ORDER_TRAVERSAL:
+                performPostOrderTraversal(rootNode);
+                break;
+            default:
+                System.err.println("Given traversal policy '" + traversal_policy + "' is NOT DEFINED!");
+        }
+    }
 
-            performPostOrderTraversal(rootNode);
-        } else if (TRAVERSAL_TYPE == DESCENDING_ORDER) {
+    public static void listTreeNodes(Node rootNode, final TREE_SORT_ORDER treeSortOrder) {
 
-            performDescendingOrderTraversal(rootNode);
-        } else {
+        switch (treeSortOrder) {
 
-            System.err.println("UNSUPPORTED TRAVERSAL TYPE RECEIVED! " + TRAVERSAL_TYPE);
-            System.out.println("SUPPORTED TRAVERSAL TYPES are Pre Order Traversal[" + TRAVERSAL_TYPE_PRE + "]" +
-                    "In Order Traversal[" + TRAVERSAL_TYPE_IN + "]" +
-                    "Post Order Traversal[" + TRAVERSAL_TYPE_POST + "]");
+            case ASCENDING_ORDER:
+                listNodesByAscendingOrder(rootNode);
+                break;
+            case DESCENDING_ORDER:
+                listNodesByDescendingOrder(rootNode);
+                break;
+            default:
+                System.err.println("Given Sorting Order '" + treeSortOrder + "' is NOT DEFINED!");
         }
     }
 
@@ -75,13 +84,23 @@ public class Traverse {
         }
     }
 
-    private static void performDescendingOrderTraversal(Node treeNode) {
+    private static void listNodesByAscendingOrder(Node treeNode) {
 
         if (treeNode != null) {
 
-            performDescendingOrderTraversal(treeNode.getRightNode());
+            listNodesByAscendingOrder(treeNode.getLeftNode());
             System.out.print(treeNode.getNodeValue() + " ");
-            performDescendingOrderTraversal(treeNode.getLeftNode());
+            listNodesByAscendingOrder(treeNode.getRightNode());
+        }
+    }
+
+    private static void listNodesByDescendingOrder(Node treeNode) {
+
+        if (treeNode != null) {
+
+            listNodesByDescendingOrder(treeNode.getRightNode());
+            System.out.print(treeNode.getNodeValue() + " ");
+            listNodesByDescendingOrder(treeNode.getLeftNode());
         }
     }
 
@@ -125,5 +144,60 @@ public class Traverse {
         System.out.println("\nStack Size: " + stack.size());
 
     }
+
+    public static void getTreeHeight(Node rootNode, final SUB_TREE subTree) {
+
+        System.out.println("node val: " + rootNode.getNodeValue());
+        if (rootNode == null) {
+
+            System.err.println("The given node does not have any descendants!");
+        }
+
+        switch (subTree) {
+
+            case LEFT_SUB_TREE:
+                System.out.println("Root Node Value: " + rootNode.getNodeValue());
+                Node leftSubTreeNode = rootNode.getLeftNode();
+                if (leftSubTreeNode == null) {
+                    System.out.println("Height of left sub tree is: 0");
+                } else {
+                    int leftSubTreeHeight = computeSubTreeHeight(leftSubTreeNode);
+                    System.out.println("Height of left sub tree is: " + (leftSubTreeHeight));
+                }
+                break;
+            case RIGHT_SUB_TREE:
+                System.out.println("Root Node Value: " + rootNode.getNodeValue());
+                Node rightSubTreeNode = rootNode.getRightNode();
+                if (rightSubTreeNode == null) {
+                    System.out.println("Height of right sub tree is: 0");
+                } else {
+                    int rightSubTreeHeight = computeSubTreeHeight(rightSubTreeNode);
+                    System.out.println("Height of right sub tree is: " + (rightSubTreeHeight));
+                }
+                break;
+            default:
+                System.err.println("The given argument '" + subTree + "' is INVALID!");
+        }
+    }
+
+    private static Integer computeSubTreeHeight(Node node) {
+
+        int leftNodeLevel;
+        if (node.getLeftNode() == null) {
+            leftNodeLevel = node.getLevel();
+        } else {
+            leftNodeLevel = computeSubTreeHeight(node.getLeftNode());
+        }
+        int rightNodeLevel;
+        if (node.getRightNode() == null) {
+            rightNodeLevel = node.getLevel();
+        } else {
+            rightNodeLevel = computeSubTreeHeight(node.getRightNode());
+        }
+
+        return Math.max(leftNodeLevel, rightNodeLevel);
+    }
+
+
 
 }

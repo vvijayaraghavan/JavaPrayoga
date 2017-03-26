@@ -1,8 +1,12 @@
 OOPS
-Overloading
-Operator Overloading
-	https://www.tutorialspoint.com/cplusplus/cpp_overloading.htm
+    Overloading
+        Operator Overloading
+	        Ref: https://www.tutorialspoint.com/cplusplus/cpp_overloading.htm
 
 Big O Notations
-http://www.newthinktank.com/2013/03/big-o-notations/
-http://bigocheatsheet.com
+    Ref: http://www.newthinktank.com/2013/03/big-o-notations/
+    Ref: http://bigocheatsheet.com
+
+Print JVM Default Parameters
+    Command: java -XX:+PrintFlagsFinal -version
+    Ref: http://xmlandmore.blogspot.com/2014/09/jdk-8-thread-stack-size-tuning.html

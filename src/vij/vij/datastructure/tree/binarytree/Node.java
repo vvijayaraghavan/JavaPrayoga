@@ -13,6 +13,7 @@ public class Node {
     //Tree Features
     private Boolean isParent; //When this is false, its the leaf node
     private Integer childCount; //When this returns 2, its a balanced binary tree node; when returns 0, its the leaf node
+    private Integer level;
 
     public Node(int nodeValue) {
 
@@ -76,6 +77,14 @@ public class Node {
     public void setRightNode(Node rightNode) {
 
         this.rightNode = rightNode;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
 }
