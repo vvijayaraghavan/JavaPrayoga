@@ -9,7 +9,8 @@ import vij.vij.datastructure.tree.Traverse;
  *      1. Creates a Binary Search Tree with integers.
  *      2. Performs all the traversal routes on the tree (PRE, IN, POST).
  *      3. Lists the node values in ascending and descending order.
- *      4. Displays the tree height of both left and right sub tree.
+ *      4. Displays the tree height/depth of both left and right sub tree.
+ *          The overall height/depth of the tree is always the max(left sub tree, right sub tree)
  */
 public class BinarySearchTree {
 
