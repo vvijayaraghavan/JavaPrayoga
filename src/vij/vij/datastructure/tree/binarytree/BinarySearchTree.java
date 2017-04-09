@@ -48,6 +48,27 @@ public class BinarySearchTree {
         Traverse.getTreeHeight(binaryTree.rootNode, Traverse.SUB_TREE.LEFT_SUB_TREE);
         System.out.println("\nFINDING HEIGHT OF RIGHT SUB TREE");
         Traverse.getTreeHeight(binaryTree.rootNode, Traverse.SUB_TREE.RIGHT_SUB_TREE);
+
+        System.out.println("\nLOWEST COMMON ANCESTOR OF 4,8");
+        Node lowestCommAnces = Traverse.lowestCommonAncestor(binaryTree.rootNode, 4, 8);
+        System.out.println(lowestCommAnces != null ? lowestCommAnces.getNodeValue() : "No Ancestor available for the given values!");
+        System.out.println("\nLOWEST COMMON ANCESTOR OF 13,16");
+        lowestCommAnces = Traverse.lowestCommonAncestor(binaryTree.rootNode, 13, 16);
+        System.out.println(lowestCommAnces != null ? lowestCommAnces.getNodeValue() : "No Ancestor available for the given values!");
+        System.out.println("\nLOWEST COMMON ANCESTOR OF 11,16");
+        lowestCommAnces = Traverse.lowestCommonAncestor(binaryTree.rootNode, 11, 16);
+        System.out.println(lowestCommAnces != null ? lowestCommAnces.getNodeValue() : "No Ancestor available for the given values!");
+        System.out.println("\nLOWEST COMMON ANCESTOR OF 3,4");
+        lowestCommAnces = Traverse.lowestCommonAncestor(binaryTree.rootNode, 3, 4);
+        System.out.println(lowestCommAnces != null ? lowestCommAnces.getNodeValue() : "No Ancestor available for the given values!");
+        System.out.println("\nLOWEST COMMON ANCESTOR OF 13,18");
+        lowestCommAnces = Traverse.lowestCommonAncestor(binaryTree.rootNode, 13, 18);
+        System.out.println(lowestCommAnces != null ? lowestCommAnces.getNodeValue() : "No Ancestor available for the given values!");
+        System.out.println("\nLOWEST COMMON ANCESTOR OF 12,8");
+        lowestCommAnces = Traverse.lowestCommonAncestor(binaryTree.rootNode, 12, 8);
+        System.out.println(lowestCommAnces != null ? lowestCommAnces.getNodeValue() : "No Ancestor available for the given values!");
+
+        System.out.println("Tree Max Depth: " + Traverse.getTreeDepth(binaryTree.rootNode));
     }
 
     /**

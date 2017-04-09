@@ -1,5 +1,6 @@
 package vij.core.enumex.operators;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.Iterator;
@@ -17,56 +18,50 @@ public enum Operator {
     NUMERIC_OPERATIONS(EnumSet.copyOf(Arrays.asList(NumericOperations.values()))),
     GENERIC_OPERATIONS(EnumSet.copyOf(Arrays.asList(GenericOperations.values()))),
 
-    STR_OPS(StringOperations.CONTAINS, StringOperations.BEGIN_WITH, GenericOperations.EQUAL),
-
     NUM_OPS(EnumSet.copyOf(Arrays.asList(GenericOperations.values())),
             EnumSet.copyOf(Arrays.asList(NumericOperations.values()))),
     ;
 
-    private EnumSet setOfOperations ;
-    private Enum[] operatorsArr;
-    private EnumSet[] setOfOperationsArr ;
 
-    Operator(EnumSet setOfOperations) {
-
-        this.setOfOperations = setOfOperations;
-    }
-
-    Operator(Enum... myEnum) {
-
-        int enumArrLen = myEnum.length;
-        operatorsArr = new Enum[enumArrLen];
-        int i=0;
-        for (Enum enumObj : myEnum) {
-
-            operatorsArr[i] = myEnum[i];
-            i++;
-        }
-    }
+    private final List<Enum> allowedOperations = new ArrayList<>();
+    private final List<String> allowedOperationNames = new ArrayList<>();
 
     Operator(EnumSet... myEnumSet) {
 
         int enumSetArrLen = myEnumSet.length;
-        setOfOperationsArr = new EnumSet[enumSetArrLen];
-        System.arraycopy(myEnumSet, 0, setOfOperationsArr, 0, enumSetArrLen);
-//        for (int i=0; i< enumSetArrLen ; i++) {
-//
-//            setOfOperationsArr[i] = myEnumSet[i];
-//        }
+        for (int i=0 ; i<enumSetArrLen ; i++) {
+
+            EnumSet enmSet = myEnumSet[i];
+            allowedOperations.addAll(enmSet);
+
+            Iterator<Enum> enmSetItr = enmSet.iterator();
+            while (enmSetItr.hasNext()) {
+
+                Enum myOprEnm = enmSetItr.next();
+                allowedOperationNames.add(myOprEnm.toString());
+            }
+        }
     }
 
-    public EnumSet[] setOfOperationsAllowed() {
+    /**
+     * This provides the allowed operations for the given data type as a List of Enum
+     *
+     * @return List<Enum>
+     */
+    public List<Enum> getAllowedOperations() {
 
-        return setOfOperationsArr;
+        return allowedOperations;
     }
 
-    public Enum[] getOperators() {
-        return operatorsArr;
-    }
+    /**
+     * This provides the allowed operations for the given data type as a List of String values.
+     * The String value is the operatorName equivalent of the corresponding field defined in the respective enum class.
+     *
+     * @return List<String>
+     */
+    public List<String> getAllowedOperationNames() {
 
-    public EnumSet getAllowedOperations() {
-
-        return setOfOperations;
+        return allowedOperationNames;
     }
 
     private enum GenericOperations implements IOperator {
@@ -75,21 +70,21 @@ public enum Operator {
         NOT_EQUAL("neq")
         ;
 
-        private String operationType;
-        GenericOperations(String operationType) {
+        private String operationName;
+        GenericOperations(String operationName) {
 
-            this.operationType = operationType;
+            this.operationName = operationName;
         }
 
-        public String getOperationType() {
+        public String getOperationName() {
 
-            return operationType;
+            return operationName;
         }
 
         @Override
         public String toString() {
 
-            return getOperationType();
+            return getOperationName();
         }
     }
 
@@ -101,21 +96,21 @@ public enum Operator {
         LESS_THAN_OR_EQUAL("lte")
         ;
 
-        private String operationType;
-        NumericOperations(String operationType) {
+        private String operationName;
+        NumericOperations(String operationName) {
 
-            this.operationType = operationType;
+            this.operationName = operationName;
         }
 
-        public String getOperationType() {
+        public String getOperationName() {
 
-            return operationType;
+            return operationName;
         }
 
         @Override
         public String toString() {
 
-            return getOperationType();
+            return getOperationName();
         }
     }
 
@@ -124,25 +119,24 @@ public enum Operator {
         CONTAINS("contains"),
         BEGIN_WITH("beginWith"),
         ENDS_WITH("endsWith"),
-
         ;
 
-        private String operationType;
-        private List<String> allowedOperations;
-        StringOperations(String operationType) {
+        private String operationName;
 
-            this.operationType = operationType;
+        StringOperations(String operationName) {
+
+            this.operationName = operationName;
         }
 
-        public String getOperationType() {
+        public String getOperationName() {
 
-            return operationType;
+            return operationName;
         }
 
         @Override
         public String toString() {
 
-            return getOperationType();
+            return getOperationName();
         }
     }
 }

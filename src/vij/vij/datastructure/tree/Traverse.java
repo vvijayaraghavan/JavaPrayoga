@@ -180,6 +180,33 @@ public class Traverse {
         }
     }
 
+    /**
+     * Returns the maximum depth of the tree comparing left and right subtrees from the given node.
+     * @param node Node
+     * @return Integer
+     */
+    public static Integer getTreeDepth(Node node) {
+
+        if (node == null) {
+            return 0;
+        } else {
+            /* compute the depth of each subtree */
+            int lDepth = getTreeDepth(node.getLeftNode());
+            int rDepth = getTreeDepth(node.getRightNode());
+
+            /* use the larger one */
+            if (lDepth > rDepth)
+                return (lDepth + 1);
+            else
+                return (rDepth + 1);
+        }
+    }
+
+    /**
+     * This method uses the attribute 'level' in the Node object
+     * @param node Node
+     * @return Integer
+     */
     private static Integer computeSubTreeHeight(Node node) {
 
         int leftNodeLevel;
@@ -198,6 +225,29 @@ public class Traverse {
         return Math.max(leftNodeLevel, rightNodeLevel);
     }
 
+    /**
+     * This implementation assumes the Node that is passed is from a binary search tree.
+     *
+     * @param startNode Node
+     * @param firstValue int
+     * @param secondValue int
+     *
+     * @return Node - which is the lowest common ancestor
+     */
+    public static Node lowestCommonAncestor(Node startNode, int firstValue, int secondValue) {
 
+        while (startNode != null) {
+
+            int startNodeValue = startNode.getNodeValue();
+            if (startNodeValue > firstValue && startNodeValue > secondValue) {
+                startNode = startNode.getLeftNode();
+            } else if (startNodeValue < firstValue && startNodeValue < secondValue) {
+                startNode = startNode.getRightNode();
+            } else {
+                return startNode;
+            }
+        }
+        return null;
+    }
 
 }
