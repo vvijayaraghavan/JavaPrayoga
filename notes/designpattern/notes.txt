@@ -1,0 +1,59 @@
+REFERENCES:
+http://www.javaworld.com/article/2078665/core-java/design-patterns--the-big-picture--part-1--design-pattern-history-and-classification.html?page=2
+http://www.journaldev.com/1827/java-design-patterns-example-tutorial#adapter-pattern
+
+STRUCTURAL PATTERNS (way of creating classes)
+--------------------------------------------------
+ADAPTER
+BRIDGE
+COMPOSITE
+DECORATOR
+FACADE
+FLYWEIGHT
+FRONT CONTROLLER
+MODULE
+PROXY
+
+CREATIONAL PATTERNS (way of creating objects)
+--------------------------------------------------
+ABSTRACT FACTORY
+BUILDER
+FACTORY METHOD
+LAZY INITIALIZATION - Used in Singleton.
+MULTITON - An expansion of Singleton.
+OBJECT POOL - Similar to connection pools in Web and App servers.
+PROTOTYPE - Specifies what prototypical instance to be used for creating objects. Just clones based on a prototype.
+RESOURCE ACQUISITION IN INITIALIZATION - Resources are acquired before object instantiated and released appropriately. Acquire all the resources in the constructor and release them using a custom release when not required.
+SINGLETON
+
+BEHAVIORAL PATTERNS (way of handling methods)
+--------------------------------------------------
+BLACKBOARD
+CHAIN OF RESPONSIBILITY
+COMMAND
+INTERPRETER
+ITERATOR
+MEMENTO
+NULL OBJECT
+OBSERVER
+SERVANT
+SPECIFICATION
+STATE
+STRATEGY
+TEMPLATE METHOD
+VISITOR
+
+CONCURRENCY PATTERNS
+--------------------------------------------------
+ACTIVE OBJECT - Method invocation and execution happens separately. A scheduler for handling requests.
+BALKING - Only executes when the object is in a particular state. Say when a method is trying to access a file's content, the access is restricted if the file is not open.
+BINDING PROPERTIES - Combines multiple observers to be synchronized/co-ordinated in a particular way.
+DOUBLE-CHECKED LOCK/GUARDED SUSPENSION - Check the condition of lock before acquiring the lock.
+EVENT BASED ASYNCHRONIZATION - Handle all long running tasks as separate thread. (https://msdn.microsoft.com/en-us/library/wewwczdw(v=vs.110).aspx, https://github.com/iluwatar/java-design-patterns/issues/469)
+LOCK - Temporarily suspend all the modifications of an Object.
+MONITOR OBJECT - Provide a mean to have mutual exclusion on the objects that are shared across multiple threads and are vulnerable to be mutually inclusive. Only one thread at a time would be allowed to execute code within the monitor, making monitors islands of single-threaded calm in a turbulent sea of multithreadedness. (http://www.javaworld.com/article/2077769/core-java/better-monitors-for-java.html)
+REACTOR - An event handler which delivers a service (actually a service handler/worker instance) to its concurrent requests. Basically this event handler though receives the requests concurrently, it will provide service handlers to those requests in a synchronous fashion.
+READ-WRITE LOCK - Provides concurrency for read by exclusive access for write.
+SCHEDULER - When many threads wants to perform an action on a single-threaded code. For example, multiple threads wants to write to a same file. Say, a log file on any application handling multiple requests.
+THREAD POOL - When there are more tasks than number of threads to perform the available tasks. JAVA Example: ExecutorService's threadpool creators.
+THREAD SPECIFIC STORAGE - Each thread having a local copy of the variables irrespective of its whether global/static etc. This is the bread and butter of java.

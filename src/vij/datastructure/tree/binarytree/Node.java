@@ -1,4 +1,4 @@
-package vij.vij.datastructure.tree.binarytree;
+package vij.datastructure.tree.binarytree;
 
 /**
  * Created by Vijay on 2017, March 24.

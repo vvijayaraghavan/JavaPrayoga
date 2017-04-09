@@ -1,6 +1,6 @@
-package vij.vij.datastructure.tree;
+package vij.datastructure.tree;
 
-import vij.vij.datastructure.tree.binarytree.Node;
+import vij.datastructure.tree.binarytree.Node;
 
 import java.util.Stack;
 

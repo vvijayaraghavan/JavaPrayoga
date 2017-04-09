@@ -1,6 +1,6 @@
-package vij.vij.datastructure.tree.binarytree;
+package vij.datastructure.tree.binarytree;
 
-import vij.vij.datastructure.tree.Traverse;
+import vij.datastructure.tree.Traverse;
 
 /**
  * Created by Vijay on 2017, March 24.
