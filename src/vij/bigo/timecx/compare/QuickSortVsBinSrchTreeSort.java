@@ -2,12 +2,8 @@ package vij.bigo.timecx.compare;
 
 import vij.bigo.timecx.BigOTimeCxUtil;
 import vij.sort.quicksort.QuickSort;
-import vij.vij.datastructure.tree.Traverse;
-import vij.vij.datastructure.tree.binarytree.BinarySearchTree;
-import vij.vij.datastructure.tree.binarytree.Node;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 /**
  * Created by Vijay on 2017, March 24.
